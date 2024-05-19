@@ -75,32 +75,32 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'mysite', # 数据库名
-#         'USER':'dbuser', # 你设置的用户名 - 非root用户
-#         'PASSWORD':'password', # # 换成你自己密码
-#         'HOST': 'db', # 注意：这里使用的是db别名，docker会自动解析成ip
-#         'PORT':'3306', # 端口
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
-# 设置redis缓存。这里密码为redis.conf里设置的密码
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mysite', # 資料庫名稱
+        'USER':'dbuser', # 用戶名稱，不要用root
+        'PASSWORD':'password', # 用戶密碼
+        'HOST': 'db', # 注意：這邊docker會自動解析成ip
+        'PORT':'3306', # port
+    }
+}
+
+# redis 密碼為redis.conf設定的密碼
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/1", #这里直接使用redis别名作为host ip地址
+        "LOCATION": "redis://redis:6379/1", # 直接使用redis別名作為host ip
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "PASSWORD": "yourpassword", # 换成你自己密码
+            "PASSWORD": "yourpassword", # redis.conf設定的密碼
         },
     }
 }
